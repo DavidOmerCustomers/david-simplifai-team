@@ -144,6 +144,11 @@
       max-width:70ch;
       margin:0 0 24px;
     }
+    .grid-4{
+      display:grid;
+      grid-template-columns:repeat(4, 1fr);
+      gap:18px;
+    }
     .grid-3{
       display:grid;
       grid-template-columns:repeat(3, 1fr);
@@ -200,6 +205,9 @@
       margin:0; padding-left:18px; color:var(--muted);
     }
     .job li + li{margin-top:6px}
+    .centered{
+      display:flex; justify-content:center;
+    }
     .resume-card .btn{margin-top:16px}
     .contact{
       text-align:center;
@@ -520,26 +528,26 @@ and <span class="brand-ref">Steton</span>.
         <p class="section-lead">
           I maintain targeted versions of my resume based on the role.
         </p>
-        <div class="grid-3">
+        <div class="grid-4">
           <div class="card resume-card">
-            <h3>SaaS / Platform Engineering</h3>
+            <h3>SaaS/Platform Engineer</h3>
             <p>Best for senior backend, platform, API, cloud, and multi-tenant SaaS roles.</p>
-            <a class="btn btn-secondary" href="https://drive.google.com/file/d/1xydYzExc2OguGcO9xgCl88H4h4cVh1kV/view?usp=sharing" target="_blank" rel="noopener noreferrer">SaaS Resume</a>
+            <div class="centered"><a class="btn btn-secondary" href="https://drive.google.com/file/d/1xydYzExc2OguGcO9xgCl88H4h4cVh1kV/view?usp=sharing" target="_blank" rel="noopener noreferrer">SaaS Resume</a></div>
           </div>
           <div class="card resume-card">
-            <h3>Middleware / Integration</h3>
+            <h3>Middleware/Integration</h3>
             <p>Best for enterprise integration, middleware, API, messaging, and systems connectivity roles.</p>
-            <a class="btn btn-secondary" href="https://drive.google.com/file/d/1DV-0yfYc91-G_QNXT60zyzrTVjKuV7VY/view?usp=sharing" target="_blank" rel="noopener noreferrer">Middleware Resume</a>
+            <div class="centered"><a class="btn btn-secondary" href="https://drive.google.com/file/d/1DV-0yfYc91-G_QNXT60zyzrTVjKuV7VY/view?usp=sharing" target="_blank" rel="noopener noreferrer">Middleware Resume</a></div>
           </div>
           <div class="card resume-card">
-            <h3>SQL Server / Data Platform</h3>
+            <h3>SQL Server/Data Platform</h3>
             <p>Best for SQL Server, database performance, data platform, and database engineering roles.</p>
-            <a class="btn btn-secondary" href="https://drive.google.com/file/d/1JN55JrOevMPQ6uAbu4O20NRLF4Myot2f/view?usp=sharing" target="_blank" rel="noopener noreferrer">DBA Resume</a>
+            <div class="centered"><a class="btn btn-secondary" href="https://drive.google.com/file/d/1JN55JrOevMPQ6uAbu4O20NRLF4Myot2f/view?usp=sharing" target="_blank" rel="noopener noreferrer">DBA Resume</a></div>
           </div>
           <div class="card resume-card">
-            <h3>I.T. / Network Administration</h3>
+            <h3>IT/Network Administrator</h3>
             <p>Best for IT support, network administration, and systems engineering roles.</p>
-            <a class="btn btn-secondary" href="https://drive.google.com/file/d/1L7mcFkucxs4P_tdFLA1TDx0hFqlnisPh/view?usp=sharing" target="_blank" rel="noopener noreferrer">IT Resume</a>
+            <div class="centered"><a class="btn btn-secondary" href="https://drive.google.com/file/d/1L7mcFkucxs4P_tdFLA1TDx0hFqlnisPh/view?usp=sharing" target="_blank" rel="noopener noreferrer">IT Resume</a></div>
           </div>
         </div>
       </div>
