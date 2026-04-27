@@ -27,6 +27,6 @@ jobs:
           target_repo_url:
             ssh://git-codecommit.<somewhere>.amazonaws.com/v1/repos/stg-david
           ssh_private_key:
-            ${{ secrets.CODECOMMIT_SSH_PRIVATE_KEY }}
+            ${{ secrets.DAVID_SIMPLIFAI_TEAM }}
           ssh_username:                                 # <-- (for codecommit) you need to specify ssh-key-id as ssh username.
-            ${{ secrets.CODECOMMIT_SSH_PRIVATE_KEY_ID }}
+            ${{ secrets.DAVID_SIMPLIFAI_TEAM }}
