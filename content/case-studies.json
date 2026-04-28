@@ -9,7 +9,7 @@
       "Tenant-aware application and audit workflow concepts",
       "Logical reporting layer over transactional data to reduce reporting overhead"
     ],
-    "url": "case-studies/multi-tenant-qa-auditing-mobile-data-collection.html"
+    "url": "../case-studies/multi-tenant-qa-auditing-mobile-data-collection.html"
   },
   {
     "id": "message-driven-enterprise-integration",
@@ -21,7 +21,7 @@
       "Canonical message structure, routing, replay, and observability model",
       "Legacy, SAP-connected, HL7, and API-based endpoint patterns"
     ],
-    "url": "case-studies/message-driven-enterprise-integration.html"
+    "url": "../case-studies/message-driven-enterprise-integration.html"
   },
   {
     "id": "replayable-vendor-api-ingestion-reporting-layer",
@@ -33,7 +33,7 @@
       "Performance-tuned SQL query shapes for reporting and integration workloads",
       "Multi-tenant integration and reporting layer across vendor and operational data"
     ],
-    "url": "case-studies/replayable-vendor-api-ingestion-reporting-layer.html"
+    "url": "../case-studies/replayable-vendor-api-ingestion-reporting-layer.html"
   },
   {
     "id": "web-based-purchasing-accounts-payable-system",
@@ -45,6 +45,6 @@
       "Vendor access for purchase order management and delivery coordination",
       "Foundation for later architecture, integration, and operational systems work"
     ],
-    "url": "case-studies/web-based-purchasing-accounts-payable-system.html"
+    "url": "../case-studies/web-based-purchasing-accounts-payable-system.html"
   }
 ]
