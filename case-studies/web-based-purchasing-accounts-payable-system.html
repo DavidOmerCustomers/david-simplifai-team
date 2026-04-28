@@ -3,42 +3,165 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Web-based purchasing and accounts payable system | David Park Omer</title>
-  <meta name="description" content="Generalized portfolio case study for David Park Omer: Web-based purchasing and accounts payable system." />
+  <title>Web-Based Purchasing & Accounts Payable System | David Park Omer</title>
+  <meta name="description" content="An anonymized architecture case study showing a web-based purchasing and accounts payable system with vendor PO access, delivery coordination, workflow visibility, and SQL-backed business operations." />
   <style>
-    :root{--bg:#0b1020;--panel:#151f3f;--text:#eef2ff;--muted:#aab5d6;--line:rgba(255,255,255,.12);--accent:#5aa7ff;--accent2:#7ef0c9;--shadow:0 14px 40px rgba(0,0,0,.32);--max:920px}
-    *{box-sizing:border-box}
-    body{margin:0;font-family:Inter,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--text);background:radial-gradient(circle at top left,rgba(90,167,255,.22),transparent 28%),linear-gradient(180deg,var(--bg),#070b17 100%);line-height:1.65}
-    a{color:inherit}
-    .wrap{width:min(calc(100% - 32px),var(--max));margin:0 auto}
-    header{padding:42px 0 20px}
-    .card{background:linear-gradient(180deg,rgba(18,27,54,.94),rgba(10,16,33,.94));border:1px solid var(--line);border-radius:22px;padding:28px;box-shadow:var(--shadow)}
-    .back{display:inline-flex;margin-bottom:18px;color:var(--accent2);text-decoration:none;font-weight:700}
-    .tag{display:inline-flex;margin-bottom:10px;padding:5px 9px;border-radius:999px;border:1px solid rgba(126,240,201,.26);color:var(--accent2);background:rgba(126,240,201,.07);font-size:.8rem;font-weight:700;letter-spacing:.02em}
-    h1{font-size:clamp(2rem,5vw,3.4rem);line-height:1.08;margin:0 0 14px;letter-spacing:-.03em}
-    h2{margin:28px 0 8px;font-size:1.35rem}
-    p,li{color:var(--muted)}
-    ul{padding-left:20px}
-    .note{margin-top:24px;padding:16px 18px;border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.03);color:var(--muted);font-size:.95rem}
+    :root{
+      --bg:#0b1020;--bg2:#111831;--panel:#151f3f;--panel2:#0f1730;--text:#eef2ff;--muted:#aab5d6;--line:rgba(255,255,255,.12);--accent:#5aa7ff;--accent2:#7ef0c9;--warn:#ffd166;--shadow:0 14px 40px rgba(0,0,0,.32);--max:1080px;
+    }
+    *{box-sizing:border-box}html{scroll-behavior:smooth}
+    body{margin:0;font-family:Inter,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--text);background:radial-gradient(circle at top left,rgba(90,167,255,.22),transparent 28%),radial-gradient(circle at top right,rgba(126,240,201,.14),transparent 24%),linear-gradient(180deg,var(--bg),#070b17 100%);line-height:1.65}
+    a{color:inherit;text-decoration:none}.wrap{width:min(calc(100% - 32px),var(--max));margin:0 auto}
+    .nav{position:sticky;top:0;z-index:20;backdrop-filter:blur(14px);background:rgba(7,11,23,.72);border-bottom:1px solid rgba(255,255,255,.07)}
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 0}.brand{font-weight:800;letter-spacing:.2px}.brand small{display:block;color:var(--muted);font-weight:600;font-size:.78rem}.nav-links{display:flex;gap:18px;flex-wrap:wrap}.nav-links a{color:var(--muted);font-size:.95rem}.nav-links a:hover{color:var(--text)}
+    .hero{padding:64px 0 26px}.hero-card,.panel,.card{background:linear-gradient(180deg,rgba(21,31,63,.9),rgba(10,17,35,.9));border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow)}.hero-card{padding:38px}
+    .eyebrow{display:inline-flex;align-items:center;gap:10px;color:var(--accent2);font-weight:700;font-size:.86rem;letter-spacing:.04em;text-transform:uppercase;margin-bottom:14px}.eyebrow::before{content:"";width:10px;height:10px;border-radius:50%;background:linear-gradient(180deg,var(--accent2),var(--accent));box-shadow:0 0 0 6px rgba(126,240,201,.12)}
+    h1{font-size:clamp(2.15rem,5vw,4rem);line-height:1.05;margin:0 0 18px;letter-spacing:-.03em;max-width:13ch}.hero p{margin:0;color:var(--muted);font-size:1.06rem;max-width:78ch}.meta-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}.chip{padding:8px 12px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.03);color:#dbe5ff;font-size:.9rem}
+    .notice{margin-top:22px;padding:14px 16px;border-radius:16px;border:1px solid rgba(255,209,102,.28);background:rgba(255,209,102,.08);color:#ffe8a8;font-size:.95rem}main{padding:14px 0 54px}section{padding:22px 0;scroll-margin-top:86px}.section-grid{display:grid;grid-template-columns:240px 1fr;gap:24px;align-items:start}.section-label{color:var(--accent2);font-weight:800;letter-spacing:.03em;text-transform:uppercase;font-size:.86rem;padding-top:8px}.content-panel{padding:26px}
+    h2{font-size:clamp(1.4rem,3vw,2rem);line-height:1.15;margin:0 0 12px;letter-spacing:-.02em}h3{font-size:1.1rem;margin:22px 0 8px}p{margin:0 0 14px;color:var(--muted)}ul{margin:0;padding-left:20px;color:var(--muted)}li+li{margin-top:7px}
+    .callout{margin:18px 0;padding:18px;border-radius:18px;border:1px solid rgba(126,240,201,.22);background:rgba(126,240,201,.07);color:#dffcf4}.callout strong{color:var(--text)}.diagram{margin:18px 0 0;padding:22px;border-radius:18px;background:rgba(255,255,255,.035);border:1px solid var(--line);overflow:auto}pre{margin:0;color:#dbe5ff;font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;font-size:.95rem;line-height:1.55;white-space:pre}
+    .pattern-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:16px}.mini-card{padding:18px;border-radius:18px;background:rgba(255,255,255,.03);border:1px solid var(--line)}.mini-card h3{margin:0 0 8px;font-size:1rem}.mini-card p{margin:0;font-size:.96rem}.result-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:16px}.result{padding:18px;border-radius:18px;border:1px solid var(--line);background:linear-gradient(180deg,rgba(90,167,255,.11),rgba(255,255,255,.025))}.result strong{display:block;font-size:1rem;margin-bottom:5px}.result span{color:var(--muted);font-size:.94rem}.footer{color:var(--muted);font-size:.92rem;padding:28px 0 44px;text-align:center}.back-link{display:inline-flex;color:var(--accent2);font-weight:700;margin-bottom:18px}
+    @media (max-width:900px){.section-grid{grid-template-columns:1fr;gap:12px}.pattern-grid,.result-strip{grid-template-columns:1fr}h1{max-width:none}}@media (max-width:640px){.hero-card,.content-panel{padding:24px}.nav-inner{align-items:flex-start;flex-direction:column}.nav-links{gap:12px}}
   </style>
 </head>
 <body>
-  <header class="wrap">
-    <a class="back" href="../index.html#portfolio">← Back to portfolio</a>
-    <div class="card">
-      <span class="tag">Business Systems Case Study</span>
-      <h1>Web-based purchasing and accounts payable system</h1>
-      <p>A recreated early-career business systems example showing how operational workflows can be translated into practical internal applications for purchasing, accounts payable, vendor coordination, and fulfillment operations.</p>
-      <h2>What this case study demonstrates</h2>
-      <ul>
-        <li>Web-based purchasing and A/P workflow model</li>
-        <li>Vendor access for purchase order management and delivery coordination</li>
-        <li>Foundation for later architecture, integration, and operational systems work</li>
-      </ul>
-      <h2>How to use this page</h2>
-      <p>This is a static CMS page. Edit this HTML file directly when you want a richer writeup, and edit <code>../content/case-studies.json</code> when you want to change the summary card shown on the homepage.</p>
-      <div class="note">This case study is generalized and anonymized. It does not contain proprietary client systems, code, data, diagrams, or confidential implementation details.</div>
+  <nav class="nav">
+    <div class="wrap nav-inner">
+      <div class="brand"><a href="../index.html">David Park Omer</a><small>Architecture Case Study</small></div>
+      <div class="nav-links"><a href="../index.html#portfolio">Portfolio</a><a href="../index.html#experience">Experience</a><a href="../index.html#contact">Contact</a></div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="wrap">
+      <a class="back-link" href="../index.html#portfolio">← Back to portfolio</a>
+      <div class="hero-card">
+        <div class="eyebrow">Business Systems · Purchasing · Accounts Payable</div>
+        <h1>Web-Based Purchasing & Accounts Payable System</h1>
+        <p>An anonymized architecture case study showing how an internal purchasing and accounts payable workflow can be moved from manual coordination into a web-based operational system with vendor access, purchase order visibility, delivery coordination, and SQL-backed workflow tracking.</p>
+        <div class="meta-row" aria-label="Case study tags">
+          <span class="chip">Purchasing Workflow</span><span class="chip">Accounts Payable</span><span class="chip">Vendor Portal</span><span class="chip">PO Management</span><span class="chip">Delivery Coordination</span><span class="chip">SQL-Backed Operations</span>
+        </div>
+        <div class="notice"><strong>Confidentiality note:</strong> This case study is generalized and recreated as a safe portfolio example. It does not contain proprietary client code, data, vendor names, diagrams, credentials, or confidential implementation details.</div>
+      </div>
     </div>
   </header>
+
+  <main>
+    <section id="overview">
+      <div class="wrap section-grid">
+        <div class="section-label">Overview</div>
+        <div class="panel content-panel">
+          <h2>Moving operational purchasing from manual process to controlled workflow</h2>
+          <p>An internal purchasing and accounts payable process needed better visibility, fewer manual handoffs, and a cleaner way to coordinate purchase orders with outside vendors. I created a web-based purchasing and A/P system that supported internal request and approval workflows while giving vendors controlled access to manage their purchase orders and coordinate deliveries.</p>
+          <p>The project reflects the early-career pattern that continued throughout my work: translating operational friction into practical software, then designing the data and workflow structure so the system could be supported, reported on, and improved over time.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="problem">
+      <div class="wrap section-grid">
+        <div class="section-label">Problem</div>
+        <div class="panel content-panel">
+          <h2>The process needed shared visibility and fewer handoffs</h2>
+          <p>Purchasing and payables activity involved multiple participants, repeated status questions, document movement, vendor coordination, and manual follow-up. The risk was not just inefficiency; it was loss of visibility across the purchasing lifecycle.</p>
+          <ul>
+            <li>Internal teams needed a clearer way to initiate and track purchasing activity.</li>
+            <li>Vendors needed controlled access to relevant purchase order information.</li>
+            <li>Delivery coordination required better status visibility across parties.</li>
+            <li>Accounts payable needed cleaner operational context for invoices, purchase orders, and fulfillment status.</li>
+            <li>Management needed reporting visibility without relying on scattered files or informal updates.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="approach">
+      <div class="wrap section-grid">
+        <div class="section-label">Approach</div>
+        <div class="panel content-panel">
+          <h2>Design principle</h2>
+          <div class="callout"><strong>Purchasing data should move through an explicit workflow, not disappear into email, phone calls, spreadsheets, or disconnected documents.</strong></div>
+          <p>The system treated purchase orders, vendor updates, delivery coordination, and payables context as related workflow data. The goal was to create a shared operational record that reduced repeated follow-up and made the status of purchasing activity easier to understand.</p>
+          <div class="diagram" aria-label="Conceptual architecture diagram">
+<pre>Internal Request / Purchasing Team
+   ↓
+Purchasing Workflow System
+   ↓
+Purchase Order Record
+   ↓                ↘
+Vendor Access        Accounts Payable Context
+   ↓                ↙
+Delivery Coordination / Status Updates
+   ↓
+SQL-Backed Reporting and Operational Visibility</pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="patterns">
+      <div class="wrap section-grid">
+        <div class="section-label">Patterns</div>
+        <div class="panel content-panel">
+          <h2>Core design patterns</h2>
+          <div class="pattern-grid">
+            <div class="mini-card"><h3>Workflow-centered data model</h3><p>Purchasing activity was modeled as a lifecycle with status, ownership, and related operational records rather than isolated documents.</p></div>
+            <div class="mini-card"><h3>Controlled vendor access</h3><p>Vendors could access relevant purchase order information and coordinate delivery activity without exposing unrelated internal data.</p></div>
+            <div class="mini-card"><h3>PO and delivery visibility</h3><p>Purchase orders and delivery coordination were connected so internal users could see operational status without repeated manual follow-up.</p></div>
+            <div class="mini-card"><h3>Accounts payable context</h3><p>Payables activity could be tied back to purchasing and fulfillment context, improving traceability across the back-office process.</p></div>
+            <div class="mini-card"><h3>SQL-backed reporting</h3><p>The system created structured data that could support operational reporting instead of relying on scattered files or tribal knowledge.</p></div>
+            <div class="mini-card"><h3>Business-first software design</h3><p>The work started from real operational pain and translated business needs into a practical application that users could adopt.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="result">
+      <div class="wrap section-grid">
+        <div class="section-label">Result</div>
+        <div class="panel content-panel">
+          <h2>Result pattern</h2>
+          <p>The resulting system gave purchasing, vendors, and accounts payable a clearer shared workflow around purchase orders and deliveries. It reduced fragmented coordination, improved operational visibility, and created a stronger data foundation for tracking purchasing activity.</p>
+          <div class="result-strip">
+            <div class="result"><strong>Clearer workflow</strong><span>Purchasing activity moved through a visible system lifecycle instead of informal handoffs.</span></div>
+            <div class="result"><strong>Vendor coordination</strong><span>Outside vendors could participate in PO and delivery activity through controlled access.</span></div>
+            <div class="result"><strong>Better traceability</strong><span>Purchasing, fulfillment, and payables context became easier to connect and report on.</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="demonstrates">
+      <div class="wrap section-grid">
+        <div class="section-label">Demonstrates</div>
+        <div class="panel content-panel">
+          <h2>What this demonstrates</h2>
+          <p>This case study shows how I approached business systems before my later enterprise integration and SaaS architecture work: understand the process, identify the data that needs to be durable, and build a workflow users can actually operate.</p>
+          <ul>
+            <li>Translating operational requirements into working software.</li>
+            <li>Designing business workflow systems around purchasing, fulfillment, vendors, and accounts payable.</li>
+            <li>Creating controlled access patterns for external participants.</li>
+            <li>Structuring data for visibility, reporting, and supportability.</li>
+            <li>Building practical internal systems that reduce manual coordination.</li>
+            <li>Connecting user support, operations, and application design into one delivery mindset.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="concepts">
+      <div class="wrap section-grid">
+        <div class="section-label">Concepts</div>
+        <div class="panel content-panel">
+          <h2>Technologies and concepts represented</h2>
+          <div class="meta-row"><span class="chip">Web-Based Business Systems</span><span class="chip">Purchasing Workflow</span><span class="chip">Accounts Payable</span><span class="chip">Vendor Portal</span><span class="chip">Purchase Orders</span><span class="chip">Delivery Coordination</span><span class="chip">SQL Data Model</span><span class="chip">Operational Reporting</span><span class="chip">Internal Application Development</span></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer wrap">© <span id="year"></span> David Park Omer. All rights reserved.</footer>
+  <script>document.getElementById('year').textContent=new Date().getFullYear();</script>
 </body>
 </html>
