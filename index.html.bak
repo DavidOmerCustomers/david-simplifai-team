@@ -257,21 +257,6 @@
     }
     .card li + li{margin-top:5px}
 
-    .case-study-actions{
-      display:flex;
-      justify-content:flex-start;
-      margin-top:16px;
-    }
-    .cms-status{
-      grid-column:1 / -1;
-      padding:22px;
-      border:1px solid var(--line);
-      border-radius:22px;
-      background:rgba(255,255,255,.03);
-      color:var(--muted);
-      box-shadow:var(--shadow);
-    }
-
     @media (max-width: 980px){
       .hero-grid, .grid-4, .grid-3, .grid-2{grid-template-columns:1fr}
       .job{grid-template-columns:1fr}
@@ -656,11 +641,28 @@ and <span class="brand-ref">Steton</span>.
     © <span id="year"></span> David Park Omer. All rights reserved.
   </footer>
 
+    <script>
+    function scrollToCurrentHash() {
+        if (!window.location.hash) return;
+
+        const target = document.querySelector(window.location.hash);
+        if (!target) return;
+
+        window.requestAnimationFrame(() => {
+        target.scrollIntoView({ behavior: "auto", block: "start" });
+        });
+    }
+
+    window.addEventListener("load", () => {
+        setTimeout(scrollToCurrentHash, 100);
+    });
+    </script>
+
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
 
     function escapeHtml(value) {
-      return String(value ?? "")
+      return String(value)
         .replaceAll("&", "&amp;")
         .replaceAll("<", "&lt;")
         .replaceAll(">", "&gt;")
@@ -668,77 +670,38 @@ and <span class="brand-ref">Steton</span>.
         .replaceAll("'", "&#039;");
     }
 
-    function getHashTarget() {
-      if (!window.location.hash) return null;
-
-      try {
-        return document.querySelector(window.location.hash);
-      } catch (error) {
-        return null;
-      }
-    }
-
-    function scrollToCurrentHash() {
-      const target = getHashTarget();
-      if (!target) return;
-
-      window.requestAnimationFrame(() => {
-        target.scrollIntoView({ behavior: "auto", block: "start" });
-      });
-    }
-
     async function loadCaseStudies() {
       const grid = document.getElementById("portfolio-grid");
       if (!grid) return;
 
       const source = grid.getAttribute("data-source") || "content/case-studies.json";
-      grid.setAttribute("aria-busy", "true");
 
       try {
         const response = await fetch(source, { cache: "no-store" });
         if (!response.ok) throw new Error(`Unable to load ${source}`);
 
         const caseStudies = await response.json();
-        grid.innerHTML = caseStudies.map((item) => {
-          const highlights = Array.isArray(item.highlights) ? item.highlights : [];
-
-          return `
-            <div class="card">
-              <span class="portfolio-tag">${escapeHtml(item.tag)}</span>
-              <h3>${escapeHtml(item.title)}</h3>
-              <p>${escapeHtml(item.summary)}</p>
-              ${highlights.length ? `
-                <ul>
-                  ${highlights.map((highlight) => `<li>${escapeHtml(highlight)}</li>`).join("")}
-                </ul>
-              ` : ""}
-              <div class="case-study-actions">
-                <a class="btn btn-secondary" href="${escapeHtml(item.url)}">Read case study</a>
-              </div>
+        grid.innerHTML = caseStudies.map((item) => `
+          <div class="card">
+            <span class="portfolio-tag">${escapeHtml(item.tag)}</span>
+            <h3>${escapeHtml(item.title)}</h3>
+            <p>${escapeHtml(item.summary)}</p>
+            <ul>
+              ${item.highlights.map((highlight) => `<li>${escapeHtml(highlight)}</li>`).join("")}
+            </ul>
+            <div class="case-study-actions">
+              <a class="btn btn-secondary" href="${escapeHtml(item.url)}">Read case study</a>
             </div>
-          `;
-        }).join("");
+          </div>
+        `).join("");
       } catch (error) {
         grid.innerHTML = `
           <div class="cms-status">
             Case studies could not be loaded from the static content file. Open the site through GitHub Pages or a local web server, then check <code>content/case-studies.json</code>.
           </div>
         `;
-        console.error(error);
-      } finally {
-        grid.removeAttribute("aria-busy");
-        scrollToCurrentHash();
       }
     }
-
-    window.addEventListener("hashchange", () => {
-      setTimeout(scrollToCurrentHash, 25);
-    });
-
-    window.addEventListener("load", () => {
-      setTimeout(scrollToCurrentHash, 100);
-      setTimeout(scrollToCurrentHash, 350);
-    });
 
     loadCaseStudies();
   </script>
