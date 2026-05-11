@@ -1,118 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-  <!-- CookieYes consent banner / consent manager -->
-  <script
-    id="cookieyes"
-    type="text/javascript"
-    src="https://cdn-cookieyes.com/client_data/fdec8a7179190e46927e592d/script.js">
-  </script>
+    <!-- Google Consent Mode defaults: deny optional analytics until consent is granted. -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('consent', 'default', {
+        'ad_storage': 'denied',
+        'ad_user_data': 'denied',
+        'ad_personalization': 'denied',
+        'analytics_storage': 'denied',
+        'functionality_storage': 'granted',
+        'security_storage': 'granted',
+        'wait_for_update': 500
+      });
+    </script>
 
     <!-- Google Tag Manager -->
     <script>
-        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({
-            'gtm.start':new Date().getTime(),event:'gtm.js'});
-            var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
-            j.async=true;
-            j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
-            f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer','GTM-PJFK7G8X');
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-PJFK7G8X');
     </script>
     <!-- End Google Tag Manager -->
-
-  <meta charset="UTF-8" />
+<meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Multi-Tenant QA Auditing & Mobile Data Collection | David Park Omer</title>
   <meta name="description" content="An anonymized architecture case study showing multi-tenant QA auditing, HTML5 mobile data collection, reporting isolation, and SaaS platform design patterns." />
-  <style>
-    :root{
-      --bg:#0b1020;
-      --bg2:#111831;
-      --panel:#151f3f;
-      --panel2:#0f1730;
-      --text:#eef2ff;
-      --muted:#aab5d6;
-      --line:rgba(255,255,255,.12);
-      --accent:#5aa7ff;
-      --accent2:#7ef0c9;
-      --warn:#ffd166;
-      --shadow:0 14px 40px rgba(0,0,0,.32);
-      --max:1080px;
-    }
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0;
-      font-family:Inter,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-      color:var(--text);
-      background:
-        radial-gradient(circle at top left,rgba(90,167,255,.22),transparent 28%),
-        radial-gradient(circle at top right,rgba(126,240,201,.14),transparent 24%),
-        linear-gradient(180deg,var(--bg),#070b17 100%);
-      line-height:1.65;
-    }
-    a{color:inherit;text-decoration:none}
-    .wrap{width:min(calc(100% - 32px),var(--max));margin:0 auto}
-    .nav{
-      position:sticky;top:0;z-index:20;
-      backdrop-filter:blur(14px);
-      background:rgba(7,11,23,.72);
-      border-bottom:1px solid rgba(255,255,255,.07);
-    }
-    .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 0}
-    .brand{font-weight:800;letter-spacing:.2px}
-    .brand small{display:block;color:var(--muted);font-weight:600;font-size:.78rem}
-    .nav-links{display:flex;gap:18px;flex-wrap:wrap}
-    .nav-links a{color:var(--muted);font-size:.95rem}
-    .nav-links a:hover{color:var(--text)}
-    .hero{padding:64px 0 26px}
-    .hero-card,.panel,.card{
-      background:linear-gradient(180deg,rgba(21,31,63,.9),rgba(10,17,35,.9));
-      border:1px solid var(--line);
-      border-radius:24px;
-      box-shadow:var(--shadow);
-    }
-    .hero-card{padding:38px}
-    .eyebrow{
-      display:inline-flex;align-items:center;gap:10px;
-      color:var(--accent2);font-weight:700;font-size:.86rem;
-      letter-spacing:.04em;text-transform:uppercase;margin-bottom:14px;
-    }
-    .eyebrow::before{
-      content:"";width:10px;height:10px;border-radius:50%;
-      background:linear-gradient(180deg,var(--accent2),var(--accent));
-      box-shadow:0 0 0 6px rgba(126,240,201,.12);
-    }
-    h1{font-size:clamp(2.15rem,5vw,4rem);line-height:1.05;margin:0 0 18px;letter-spacing:-.03em;max-width:13ch}
-    .hero p{margin:0;color:var(--muted);font-size:1.06rem;max-width:78ch}
-    .meta-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
-    .chip{padding:8px 12px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.03);color:#dbe5ff;font-size:.9rem}
-    main{padding:10px 0 52px}
-    section{padding:18px 0;scroll-margin-top:84px}
-    h2{font-size:clamp(1.45rem,3vw,2.1rem);margin:0 0 12px;letter-spacing:-.02em}
-    h3{margin:0 0 10px;font-size:1.08rem}
-    p{color:var(--muted)}
-    .panel{padding:26px}
-    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-    .card{padding:22px;height:100%}
-    .card p{margin:0}
-    ul{margin:0;padding-left:20px;color:var(--muted)}
-    li + li{margin-top:8px}
-    .callout{border-left:4px solid var(--accent2);padding:18px 20px;background:rgba(126,240,201,.07);border-radius:14px;color:#dbe5ff;margin:18px 0}
-    .callout strong{color:var(--text)}
-    .diagram{background:rgba(0,0,0,.22);border:1px solid var(--line);border-radius:18px;padding:22px;overflow:auto;margin-top:14px}
-    pre{margin:0;color:#dbe5ff;font-family:"SFMono-Regular",Consolas,"Liberation Mono",monospace;font-size:.92rem;line-height:1.55;white-space:pre}
-    .note{border:1px solid rgba(255,209,102,.35);background:rgba(255,209,102,.08);border-radius:18px;padding:18px;color:#f7e6af}
-    .note p{color:#f7e6af;margin:0}
-    .footer{color:var(--muted);font-size:.92rem;padding:18px 0 44px;text-align:center}
-    .back-link{display:inline-flex;color:var(--accent2);font-weight:700;margin-bottom:18px}
-    .btn{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:0 16px;border-radius:14px;border:1px solid var(--line);background:rgba(255,255,255,.03);font-weight:700;margin-top:22px}
-    .btn:hover{border-color:rgba(255,255,255,.28)}
-    .accent{color:var(--accent2);font-weight:700}
-    @media (max-width:900px){.grid-2,.grid-3{grid-template-columns:1fr}.nav-inner{align-items:flex-start;flex-direction:column}.hero-card{padding:28px}}
-  </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.1.0/dist/cookieconsent.css" />
+    <link rel="stylesheet" href="../assets/css/case-studies/multi-tenant-qa-auditing-mobile-data-collection.css" />
+    <link rel="stylesheet" href="../assets/css/cookie-consent-overrides.css" />
 </head>
 <body>
 
@@ -329,10 +248,15 @@ Reports, Analytics, Dashboards, Exports</pre>
 
   <footer class="footer wrap">
     © <span id="year"></span> David Park Omer. All rights reserved.
+    <span class="footer-separator" aria-hidden="true"> · </span>
+    <button type="button" class="cookie-preferences-link" data-cookie-preferences>Cookie preferences</button>
   </footer>
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
+  <script src="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.1.0/dist/cookieconsent.umd.js"></script>
+  <script src="../assets/js/cookie-consent.js"></script>
+
 </body>
 </html>
