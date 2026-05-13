@@ -24,10 +24,8 @@
         linear-gradient(180deg, var(--bg), #070b17 100%);
       line-height:1.6;
     }
-    section[id], .hero[id] {
+    main > section[id] {
       scroll-margin-top: var(--header-h);
-    }
-    section[id] {
       min-height: auto;
       transition: min-height 220ms ease, padding 220ms ease;
     }
@@ -39,9 +37,15 @@
     main > section:target > .wrap {
       width: min(calc(100% - 32px), var(--max));
     }
+    @media (max-width: 760px) {
+      main > section:target {
+        min-height: auto;
+        display: block;
+      }
+    }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
-      section[id] { transition: none; }
+      main > section[id] { transition: none; }
     }
     .brand-ref {
       color: var(--text);
@@ -108,38 +112,12 @@
       font-size:1.05rem;
       max-width:68ch;
     }
-    .hero,
-.section {
-  scroll-margin-top: var(--header-h);
-}
-
-/* Normal scroll behavior */
-.hero,
-.section {
-  padding: 78px 0 42px;
-}
-
-/* Anchor landing behavior */
-.hero:target,
-.section:target {
-  min-height: min(calc(100svh - var(--header-h)), 760px);
-  display: flex;
-  align-items: center;
-}
-
-@media (max-width: 760px) {
-  .hero:target,
-  .section:target {
-    min-height: auto;
-    display: block;
-  }
-}
-
-/* Keep centered content from stretching weirdly */
-.hero:target > .wrap,
-.section:target > .wrap {
-  width: min(calc(100% - 32px), var(--max));
-}
+    .hero-card p{
+      margin:0 0 16px;
+      color:var(--muted);
+      font-size:1.05rem;
+      max-width:68ch;
+    }
     .cta-row{
       display:flex; flex-wrap:wrap; gap:14px; margin-top:24px;
     }

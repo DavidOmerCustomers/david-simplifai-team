@@ -57,7 +57,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </nav>
 
-  <header id="top" class="hero">
+  <main>
+    <section id="top">
     <div class="wrap hero-grid">
       <div class="hero-card">
         <div class="eyebrow">Open to Senior Engineering Opportunities</div>
@@ -89,9 +90,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
       </aside>
     </div>
-  </header>
+    </section>
 
-  <main>
     <section id="about">
       <div class="wrap">
         <h2>What I bring</h2>
@@ -206,7 +206,58 @@ and <span class="brand-ref">Steton</span>.
         </p>
 
         <div id="portfolio-grid" class="grid-2" data-source="content/case-studies.json">
-          <div class="cms-status">Loading case studies…</div>
+          <div class="card">
+            <span class="portfolio-tag">SaaS / Mobile Case Study</span>
+            <h3>Multi-tenant QA auditing and mobile data collection</h3>
+            <p>A recreated SaaS architecture model based on high-volume quality auditing, cross-platform HTML5 mobile data collection, tenant-aware workflows, and operational reporting.</p>
+                <ul>
+                  <li>HTML5 cross-platform mobile data collection model</li>
+                  <li>Tenant-aware application and audit workflow concepts</li>
+                  <li>Logical reporting layer over transactional data to reduce reporting overhead</li>
+                </ul>
+            <div class="case-study-actions">
+              <a class="btn btn-secondary" href="case-studies/multi-tenant-qa-auditing-mobile-data-collection.html">Read case study</a>
+            </div>
+          </div>
+          <div class="card">
+            <span class="portfolio-tag">Integration Case Study</span>
+            <h3>Message-driven enterprise integration</h3>
+            <p>A mock enterprise integration pattern based on legacy-to-modern system connectivity, message-based architecture, interface contracts, runtime configuration, retry handling, and operational monitoring.</p>
+                <ul>
+                  <li>Message-level configuration propagation so runtime behavior travels with the message</li>
+                  <li>Canonical message structure, routing, replay, and observability model</li>
+                  <li>Legacy, SAP-connected, HL7, and API-based endpoint patterns</li>
+                </ul>
+            <div class="case-study-actions">
+              <a class="btn btn-secondary" href="case-studies/message-driven-enterprise-integration.html">Read case study</a>
+            </div>
+          </div>
+          <div class="card">
+            <span class="portfolio-tag">Data / API Case Study</span>
+            <h3>Replayable vendor API ingestion and reporting layer</h3>
+            <p>A generalized data platform pattern showing efficient vendor API consumption, SharePoint Online caching, multi-tenant integration, and reporting design without sacrificing recovery or auditability.</p>
+                <ul>
+                  <li>Idempotent API consumer that reduces repetitive object pulls and supports replay</li>
+                  <li>Performance-tuned SQL query shapes for reporting and integration workloads</li>
+                  <li>Multi-tenant integration and reporting layer across vendor and operational data</li>
+                </ul>
+            <div class="case-study-actions">
+              <a class="btn btn-secondary" href="case-studies/replayable-vendor-api-ingestion-reporting-layer.html">Read case study</a>
+            </div>
+          </div>
+          <div class="card">
+            <span class="portfolio-tag">Business Systems Case Study</span>
+            <h3>Web-based purchasing and accounts payable system</h3>
+            <p>A recreated early-career business systems example showing how operational workflows can be translated into practical internal applications for purchasing, accounts payable, vendor coordination, and fulfillment operations.</p>
+                <ul>
+                  <li>Web-based purchasing and A/P workflow model</li>
+                  <li>Vendor access for purchase order management and delivery coordination</li>
+                  <li>Foundation for later architecture, integration, and operational systems work</li>
+                </ul>
+            <div class="case-study-actions">
+              <a class="btn btn-secondary" href="case-studies/web-based-purchasing-accounts-payable-system.html">Read case study</a>
+            </div>
+          </div>
         </div>
 
         <div class="portfolio-note">
@@ -459,9 +510,91 @@ and <span class="brand-ref">Steton</span>.
       });
     }
 
+    const fallbackCaseStudies = [
+      {
+            "id": "multi-tenant-qa-auditing-mobile-data-collection",
+            "tag": "SaaS / Mobile Case Study",
+            "title": "Multi-tenant QA auditing and mobile data collection",
+            "summary": "A recreated SaaS architecture model based on high-volume quality auditing, cross-platform HTML5 mobile data collection, tenant-aware workflows, and operational reporting.",
+            "highlights": [
+                  "HTML5 cross-platform mobile data collection model",
+                  "Tenant-aware application and audit workflow concepts",
+                  "Logical reporting layer over transactional data to reduce reporting overhead"
+            ],
+            "url": "case-studies/multi-tenant-qa-auditing-mobile-data-collection.html"
+      },
+      {
+            "id": "message-driven-enterprise-integration",
+            "tag": "Integration Case Study",
+            "title": "Message-driven enterprise integration",
+            "summary": "A mock enterprise integration pattern based on legacy-to-modern system connectivity, message-based architecture, interface contracts, runtime configuration, retry handling, and operational monitoring.",
+            "highlights": [
+                  "Message-level configuration propagation so runtime behavior travels with the message",
+                  "Canonical message structure, routing, replay, and observability model",
+                  "Legacy, SAP-connected, HL7, and API-based endpoint patterns"
+            ],
+            "url": "case-studies/message-driven-enterprise-integration.html"
+      },
+      {
+            "id": "replayable-vendor-api-ingestion-reporting-layer",
+            "tag": "Data / API Case Study",
+            "title": "Replayable vendor API ingestion and reporting layer",
+            "summary": "A generalized data platform pattern showing efficient vendor API consumption, SharePoint Online caching, multi-tenant integration, and reporting design without sacrificing recovery or auditability.",
+            "highlights": [
+                  "Idempotent API consumer that reduces repetitive object pulls and supports replay",
+                  "Performance-tuned SQL query shapes for reporting and integration workloads",
+                  "Multi-tenant integration and reporting layer across vendor and operational data"
+            ],
+            "url": "case-studies/replayable-vendor-api-ingestion-reporting-layer.html"
+      },
+      {
+            "id": "web-based-purchasing-accounts-payable-system",
+            "tag": "Business Systems Case Study",
+            "title": "Web-based purchasing and accounts payable system",
+            "summary": "A recreated early-career business systems example showing how operational workflows can be translated into practical internal applications for purchasing, accounts payable, vendor coordination, and fulfillment operations.",
+            "highlights": [
+                  "Web-based purchasing and A/P workflow model",
+                  "Vendor access for purchase order management and delivery coordination",
+                  "Foundation for later architecture, integration, and operational systems work"
+            ],
+            "url": "case-studies/web-based-purchasing-accounts-payable-system.html"
+      }
+];
+
+    function renderCaseStudies(caseStudies) {
+      const grid = document.getElementById("portfolio-grid");
+      if (!grid) return;
+
+      grid.innerHTML = caseStudies.map((item) => {
+        const highlights = Array.isArray(item.highlights) ? item.highlights : [];
+
+        return `
+          <div class="card">
+            <span class="portfolio-tag">${escapeHtml(item.tag)}</span>
+            <h3>${escapeHtml(item.title)}</h3>
+            <p>${escapeHtml(item.summary)}</p>
+            ${highlights.length ? `
+              <ul>
+                ${highlights.map((highlight) => `<li>${escapeHtml(highlight)}</li>`).join("")}
+              </ul>
+            ` : ""}
+            <div class="case-study-actions">
+              <a class="btn btn-secondary" href="${escapeHtml(item.url)}">Read case study</a>
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
     async function loadCaseStudies() {
       const grid = document.getElementById("portfolio-grid");
       if (!grid) return;
+
+      if (window.location.protocol === "file:") {
+        renderCaseStudies(fallbackCaseStudies);
+        scrollToCurrentHash();
+        return;
+      }
 
       const source = grid.getAttribute("data-source") || "content/case-studies.json";
       grid.setAttribute("aria-busy", "true");
@@ -471,31 +604,9 @@ and <span class="brand-ref">Steton</span>.
         if (!response.ok) throw new Error(`Unable to load ${source}`);
 
         const caseStudies = await response.json();
-        grid.innerHTML = caseStudies.map((item) => {
-          const highlights = Array.isArray(item.highlights) ? item.highlights : [];
-
-          return `
-            <div class="card">
-              <span class="portfolio-tag">${escapeHtml(item.tag)}</span>
-              <h3>${escapeHtml(item.title)}</h3>
-              <p>${escapeHtml(item.summary)}</p>
-              ${highlights.length ? `
-                <ul>
-                  ${highlights.map((highlight) => `<li>${escapeHtml(highlight)}</li>`).join("")}
-                </ul>
-              ` : ""}
-              <div class="case-study-actions">
-                <a class="btn btn-secondary" href="${escapeHtml(item.url)}">Read case study</a>
-              </div>
-            </div>
-          `;
-        }).join("");
+        renderCaseStudies(caseStudies);
       } catch (error) {
-        grid.innerHTML = `
-          <div class="cms-status">
-            Case studies could not be loaded from the static content file. Open the site through GitHub Pages or a local web server, then check <code>content/case-studies.json</code>.
-          </div>
-        `;
+        renderCaseStudies(fallbackCaseStudies);
         console.error(error);
       } finally {
         grid.removeAttribute("aria-busy");
