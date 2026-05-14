@@ -7,17 +7,50 @@ This version keeps GitHub Pages hosting simple while making the portfolio case s
 - `index.html` — main resume / portfolio page
 - `content/case-studies.json` — homepage portfolio card content
 - `case-studies/*.html` — static detail pages for each case study
+- `.env` — operator-side Portmason configuration for the selected environment
+- `.env.example` — safe development example
+- `.env.generated` — rendered dotenv output generated from `.env`
+- `config.generated.json` — browser-safe generated config consumed by the static site
+- `assets/js/site-config.js` — loads browser-safe config and installs analytics when configured
+
+## Configuration workflow
+
+The website should not read `.env` directly in the browser. Portmason owns the environment-specific workflow:
+
+```text
+selected env file
+  ↓
+pm-setup
+  ↓
+environment-specific runtime adapter
+  ↓
+config.generated.json
+  ↓
+static website
+```
+
+Adapters are environment-specific. For example, DEV, QAS, and PRD may use different `RUNTIME_ADAPTER_CODE` values in their own env files. `pm-setup` should run the appropriate provision, deploy, configure, and related workflow for the selected environment.
+
+For this GitHub Pages static deployment, the production `.env` uses:
+
+```env
+RUNTIME_ADAPTER_CODE=static-github
+```
+
+Analytics values such as `GTM_CONTAINER_ID` are rendered into `config.generated.json`. They are intentionally not hard-coded in the HTML.
 
 ## Editing workflow
 
 1. Edit `content/case-studies.json` to change titles, summaries, tags, card bullets, or URLs.
 2. Edit the matching file in `case-studies/` when a full case-study page needs richer content.
-3. Commit and push to GitHub.
-4. GitHub Pages serves the updated static site.
+3. Update the environment file when configuration changes are needed.
+4. Run Portmason setup/deploy for the selected environment.
+5. Commit and push to GitHub.
+6. GitHub Pages serves the updated static site.
 
 ## Local preview
 
-Because the homepage uses `fetch()` to load the JSON file, preview through a local web server instead of double-clicking the file.
+Because the homepage uses `fetch()` to load JSON files, preview through a local web server instead of double-clicking the file.
 
 ```bash
 python3 -m http.server 8080
@@ -28,6 +61,18 @@ Then open:
 ```text
 http://localhost:8080
 ```
+
+## Verification
+
+After Portmason renders configuration, confirm these files exist and contain expected non-secret values:
+
+```bash
+test -f .env.generated
+test -f config.generated.json
+python3 -m json.tool config.generated.json >/dev/null
+```
+
+Then preview locally and confirm the page loads without console errors.
 
 ## Privacy note
 

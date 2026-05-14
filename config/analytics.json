@@ -1,6 +1,0 @@
-{
-  "site": "david.simplifai.team",
-  "gtmContainerId": "GTM-PJFK7G8X",
-  "ga4MeasurementId": "G-6W6PYL2FP0",
-  "notes": "The site installs Google Tag Manager only. GA4/Google Tag should be configured inside the GTM container to avoid duplicate page_view events."
-}
