@@ -10,25 +10,26 @@
     <link rel="stylesheet" href="../assets/css/cookie-consent-overrides.css" />
     <script src="../assets/js/site-config.js" data-config-path="../config.generated.json"></script>
 </head>
-<body>
+<body data-case-subtitle="Integration Case Study">
+<!-- PM:CASE-HEADER -->
 <nav class="nav">
     <div class="wrap nav-inner">
       <div class="brand">
         <a href="/#top">David Park Omer</a>
-        <small>Architecture Case Study</small>
+        <small>Integration Case Study</small>
       </div>
       <div class="nav-links">
-        <a href="/#about">About</a>
-        <a href="/#focus">Focus Areas</a>
-        <a href="/#results">Results</a>
-        <a href="/#portfolio">Portfolio</a>
-        <a href="/#experience">Experience</a>
-        <a href="/#skills">Skills</a>
-        <a href="/#resumes">Resumes</a>
+        <a href="#overview">Overview</a>
+        <a href="#problem">Challenge</a>
+        <a href="#approach">Approach</a>
+        <a href="#patterns">Architecture</a>
+        <a href="#result">Results</a>
+        <a href="/#portfolio">Back to Portfolio</a>
         <a href="/#contact">Contact</a>
       </div>
     </div>
   </nav>
+<!-- /PM:CASE-HEADER -->
 
   <main>
     <section id="top">
@@ -223,11 +224,13 @@ SAP · Healthcare Systems · Government Platforms · Enterprise Applications</pr
     </section>
   </main>
 
-  <footer class="footer wrap">
+<!-- PM:FOOTER -->
+<footer class="footer wrap">
     © <span id="year"></span> David Park Omer. All rights reserved.
     <span class="footer-separator" aria-hidden="true"> · </span>
     <button type="button" class="cookie-preferences-link" data-cookie-preferences>Cookie preferences</button>
   </footer>
+<!-- /PM:FOOTER -->
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();

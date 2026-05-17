@@ -417,3 +417,57 @@
     @media (max-width:900px){.section-grid{grid-template-columns:1fr;gap:12px}.pattern-grid,.result-strip{grid-template-columns:1fr}h1{max-width:none}}@media (max-width:640px){.hero-card,.content-panel{padding:24px}.nav-inner{align-items:flex-start;flex-direction:column}.nav-links{gap:12px}}
 
 /* ===== END case-studies/web-based-purchasing-accounts-payable-system.css ===== */
+
+/* ===== Portmason fixed-footer support =====
+   Mirrors the corp-site behavior: the footer remains visible while
+   the document keeps enough bottom padding so content is not hidden.
+*/
+:root{
+  --footer-h: 56px;
+}
+body{
+  padding-bottom: var(--footer-h);
+}
+main{
+  padding-bottom: calc(54px + var(--footer-h));
+}
+.footer{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  z-index: 1000;
+  width: 100%;
+  min-height: var(--footer-h);
+  margin: 0;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  background: rgba(7, 11, 23, .94);
+  border-top: 1px solid rgba(255,255,255,.12);
+  box-shadow: 0 -12px 30px rgba(0,0,0,.24);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: rgba(238,242,255,.82);
+  text-align: center;
+}
+.footer.wrap{
+  max-width: none;
+}
+.footer a,
+.footer button{
+  color: inherit;
+}
+.footer a:hover,
+.footer a:focus-visible,
+.footer button:hover,
+.footer button:focus-visible{
+  color: var(--accent2);
+}
+@media (max-width: 640px){
+  :root{
+    --footer-h: 76px;
+  }
+}

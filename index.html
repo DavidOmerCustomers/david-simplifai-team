@@ -11,6 +11,7 @@
     <script src="assets/js/site-config.js" data-config-path="config.generated.json"></script>
 </head>
 <body>
+<!-- PM:HOME-HEADER -->
 <nav class="nav">
     <div class="wrap nav-inner">
       <div class="brand">
@@ -29,6 +30,7 @@
       </div>
     </div>
   </nav>
+<!-- /PM:HOME-HEADER -->
 
   <main>
     <section id="top">
@@ -480,11 +482,13 @@ and <span class="brand-ref">Steton</span>.
     </section>
   </main>
 
-  <footer class="footer wrap">
+<!-- PM:FOOTER -->
+<footer class="footer wrap">
     © <span id="year"></span> David Park Omer. All rights reserved.
     <span class="footer-separator" aria-hidden="true"> · </span>
     <button type="button" class="cookie-preferences-link" data-cookie-preferences>Cookie preferences</button>
   </footer>
+<!-- /PM:FOOTER -->
 
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();

@@ -30,6 +30,8 @@ main() {
     file="${PORTMASON_SHARE}/pm-setup-${RUNTIME_CODE}"
     [[ -r "$file" ]] && . "$file" "$@"
 
+    # if a custom setup file exists, it must handle all deployment tasks for the project,
+    # Otherwise, run the standard runtime deploy followed by the standard adapter deploy
     file="${SCRIPT_DIR}/setup"
     if [[ -r "$file" ]]; then
         . "$file" "$@"
@@ -50,6 +52,10 @@ main() {
                 ;;
         esac
     else
+        # run the optional runtime deploy script
+            file="${PORTMASON_SHARE}/pm-deploy-${RUNTIME_CODE}"
+            [[ -r "$file" ]] && . "$file" "$@"
+
         # run the optional adapter deploy script
         if declare -F pm_bridge_deploy >/dev/null 2>&1; then
             log INFO "pm-setup: using bridge deploy hook: pm_bridge_deploy"

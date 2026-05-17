@@ -77,3 +77,24 @@ Then preview locally and confirm the page loads without console errors.
 ## Privacy note
 
 All case studies are generalized and anonymized. Do not add proprietary code, client data, screenshots, confidential architecture diagrams, or implementation details.
+
+## Portmason static partials
+
+This site uses Portmason-managed static partial regions for repeated HTML.
+
+- `partials/home-header.html` renders the home page navigation.
+- `partials/case-header.html` renders case-study navigation.
+- `partials/footer.html` renders the shared footer.
+- Pages keep managed regions with `<!-- PM:NAME -->` and `<!-- /PM:NAME -->` markers.
+- `portmason/pm-deploy-static` refreshes those regions before the static GitHub Pages deployment path runs.
+
+Do not hand-edit rendered content inside a PM marker block. Edit the matching file in `partials/` and run `portmason/pm-setup`.
+
+## Fixed Footer Behavior
+
+The shared footer is rendered from `partials/footer.html` and is kept visible with CSS in:
+
+- `assets/css/styles.css`
+- `assets/css/case-study.css`
+
+The footer uses `position: fixed` with `--footer-h` and matching bottom padding on the document so page content does not sit underneath it.
